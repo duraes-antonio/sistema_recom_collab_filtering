@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Dict
 
 
 class Avaliacao():
@@ -12,6 +12,30 @@ class Avaliacao():
         self.nota = nota
         self.usuario_id = usuario_id
         self.gostou = nota >= min_aprov
+
+
+def agrupar_por_autor(avaliacoes: List[Avaliacao]) -> Dict[int, List[Avaliacao]]:
+    dic_usuario_id_avals: Dict[int, List[Avaliacao]] = {}
+
+    for a in avaliacoes:
+        if a.usuario_id in dic_usuario_id_avals:
+            dic_usuario_id_avals[a.usuario_id].append(a)
+        else:
+            dic_usuario_id_avals[a.usuario_id] = [a]
+
+    return dic_usuario_id_avals
+
+
+def agrupar_por_filme(avaliacoes: List[Avaliacao]) -> Dict[int, List[Avaliacao]]:
+    dic_f_id_avals: Dict[int, List[Avaliacao]] = {}
+
+    for a in avaliacoes:
+        if a.filme_id in dic_f_id_avals:
+            dic_f_id_avals[a.filme_id].append(a)
+        else:
+            dic_f_id_avals[a.filme_id] = [a]
+
+    return dic_f_id_avals
 
 
 def parser_linha_avaliacao(linha: str, sep=',') -> Avaliacao:

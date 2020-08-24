@@ -1,4 +1,5 @@
-from typing import List, Optional
+import random
+from typing import List
 
 
 class Filme():
@@ -6,18 +7,16 @@ class Filme():
     id = 0
     titulo = ''
 
-    def __init__(self, titulo: str, generos: List[str], id: Optional[int]):
+    def __init__(self, titulo: str, generos: List[str], id: int):
         self.generos = generos
-        self.id = id if id else self.id
+        self.id = id
         self.titulo = titulo
 
     def __str__(self):
         return f"""Título:\t\t{self.titulo}\nGêneros:\t{', '.join(self.generos)}"""
 
 
-def parser_linha_filme(
-        linha: str, sep=',', segundo_sep="\"", genero_sep='|'
-) -> Filme:
+def parser_linha_filme(linha: str, sep=',', segundo_sep="\"", genero_sep='|') -> Filme:
     """
     Converte uma linha de texto em uma instância de Filme
     :param linha: Linha contendo Id, título e uma lista de gêneros
@@ -41,3 +40,9 @@ def parser_linha_filme(
         id_titulo_generos[1], id_titulo_generos[2].split(genero_sep),
         int(id_titulo_generos[0])
     )
+
+
+def sortear_filmes(filmes: List[Filme], qtd: int) -> List[Filme]:
+    total = len(filmes)
+    indices_aleat = random.sample(range(0, total), min(total, qtd))
+    return [filmes[i] for i in indices_aleat]
