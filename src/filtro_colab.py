@@ -11,6 +11,7 @@ def filtro_colab(
 ) -> List[Tuple[Filme, int]]:
     f_id_score: Dict[int, int] = {}
     u_id_simil: Dict[int, int] = {}
+    id_filmes_vistos = [a.filme_id for a in minhas_avals]
 
     # Itere sobre cada avaliação do usuário alvo
     for a in minhas_avals:
@@ -29,7 +30,7 @@ def filtro_colab(
         # Para cada avaliação do usuário similar atual, se o autor gostou
         # do filme avaliado, então incremente a chance de recomendá-lo
         for a in u_id_avaliacoes[u_id]:
-            if a.gostou:
+            if a.gostou and a.filme_id not in id_filmes_vistos:
                 if a.filme_id in f_id_score:
                     f_id_score[a.filme_id] += 1
                 else:
