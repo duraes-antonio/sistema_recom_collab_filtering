@@ -11,6 +11,8 @@ def filtro_colab(
 ) -> List[Tuple[Filme, int]]:
     f_id_score: Dict[int, int] = {}
     u_id_simil: Dict[int, int] = {}
+
+    # Lista de filmes já avaliados para evitar recomendá-los
     id_filmes_vistos = [a.filme_id for a in minhas_avals]
 
     # Itere sobre cada avaliação do usuário alvo
