@@ -19,6 +19,7 @@ class Filme():
 def parser_linha_filme(linha: str, sep=',', segundo_sep="\"", genero_sep='|') -> Filme:
     """
     Converte uma linha de texto em uma instância de Filme
+
     :param linha: Linha contendo Id, título e uma lista de gêneros
     :param sep: Separador dos três atributos (Id, título e gêneros)
     :param segundo_sep: Separador para títulos que contém virgula
@@ -43,6 +44,13 @@ def parser_linha_filme(linha: str, sep=',', segundo_sep="\"", genero_sep='|') ->
 
 
 def sortear_filmes(filmes: List[Filme], qtd: int) -> List[Filme]:
+    """
+    Retorna uma lista com N filmes em ordem randômica
+
+    :param filmes: Lista com todos filmes disponíveis para sortear
+    :param qtd: Quantidade de itens a serem sorteados e retornados
+    :return: Lista randomizada de filmes
+    """
     total = len(filmes)
     indices_aleat = random.sample(range(0, total), min(total, qtd))
     return [filmes[i] for i in indices_aleat]
